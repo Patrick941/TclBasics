@@ -104,3 +104,6 @@ for {set i 0} {$i < 10} {incr i} {
     puts "Main iteration $i"
     co1
 }
+
+set value [expr { rand () }]
+puts $value

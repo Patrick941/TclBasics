@@ -172,3 +172,9 @@ for {set i 0} {$i < 10} {incr i} {
     co1
 }
 ```
+### Random Number Generator
+A number can be randomly generated in tcl like it can with C and many other languages. It can be done in tcl using the "rand ()" routine. It will generate a number between 0 and 1. This can then be multiplied to get a number between a certain range and added to to get a number between a range that is not tied to 0 at one side. The simple usage of rand () can be given as follows.
+```t
+set value [expr { rand () }]
+puts $value
+```
