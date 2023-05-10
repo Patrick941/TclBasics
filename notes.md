@@ -128,3 +128,29 @@ While loops are then much as would be expected. They follow the same syntax as a
 ```
 while {$i < 100}
 ```
+### Lists
+Lists are created in TCL by using whitespaces. This means we simply put a space between values in order to create a list of these values. This can be used in conjuction with our print loop function above as follows:
+```t
+set someList 10\ 20\ 30
+printLoop $someList
+```
+Lists can be created from other lists as follows:
+```t
+set someList 10\ 20\ 30
+set someOtherList 40\ 50\ 60
+set someThirdList $someList\ $someOtherList
+printLoop $someThirdList
+```
+### Eval 
+Eval can be used to execute a some code by passing both the operation name and the operation arguments both as arguments to the eval block. An example of an eval block in use is given below:
+```t
+set command "puts"
+set args "Hello world!"
+eval $command [list $args]
+```
+In the above code snippet braces are placed around the args list so that whitespaces are not treated as seperate words but it understand that the words are all part of one string.
+### Redefining routines
+We can redefine a given routine in a given namespace and apply a different meaning to it. For example if we wanted to redefine the while loop to print the counter of iterations as it goes we could do that as follows:
+```t
+
+```

@@ -79,5 +79,17 @@ proc printLoop {args} {
         puts $arg
     }
 }
+set someList 10\ 20\ 30
+set someOtherList 40\ 50\ 60
+set someThirdList $someList\ $someOtherList
+printLoop $someThirdList
 
-printLoop 1 2 3 4 5 6 7 8
+set command "puts"
+set args "Hello world!"
+eval $command [list $args]
+
+rename while :: oldWhile
+proc while {} {
+    puts "Hello world!"
+}
+
