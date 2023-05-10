@@ -38,3 +38,20 @@ set object(string1) Hello
 set object(string2) world
 set object(string3) !
 puts "$object(string1) $object(string2)$object(string3)"
+
+namespace eval block2 {
+    #puts $block::blockVal
+}
+
+
+namespace eval block {
+    variable blockVal 1
+    incr blockVal 3
+}
+
+proc block::passedBlock {} {
+    variable blockVal
+    puts $blockVal
+}
+
+block::passedBlock
