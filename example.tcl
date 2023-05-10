@@ -55,3 +55,29 @@ proc block::passedBlock {} {
 }
 
 block::passedBlock
+
+set value 0
+namespace eval level3 {
+    variable value
+    set value 1
+    namespace eval level2 {
+        variable value
+        set value 2
+        namespace eval level1 {
+            variable value
+            set value 3
+            puts $value
+        }
+        puts $value
+    }
+    puts $value
+}
+puts $value
+
+proc printLoop {args} {
+    foreach arg $args {
+        puts $arg
+    }
+}
+
+printLoop 1 2 3 4 5 6 7 8
