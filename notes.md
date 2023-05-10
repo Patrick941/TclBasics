@@ -54,6 +54,26 @@ namespace eval block {
     incr blockVal 3
 }
 ```
+When using set, it will first try to set the value of a local variable and will go up the namespace heirarchy to eventually global variables and will set the first one it find. This can be demonstrated by the following code snippet which outputs 3 then 2 then 1 then 0.
+```t
+set value 0
+namespace eval level3 {
+    variable value
+    set value 1
+    namespace eval level2 {
+        variable value
+        set value 2
+        namespace eval level1 {
+            variable value
+            set value 3
+            puts $value
+        }
+        puts $value
+    }
+    puts $value
+}
+puts $value
+```
 ### Casting to a namespace
 We can also cast to a namespace to access variables inside this namespace. We can do this is the following code snippet where we perform a cast for a single variable inside a line of code.
 ```t
@@ -67,7 +87,44 @@ proc block::passedBlock {} {
     variable blockVal
     puts $blockVal
 }
-
 block::passedBlock
-
+```
+To specify the use of a global variable we can use two colons with nothing before them to specify the global space. This can be used to specify a global variable or to enter a different namespace. It would be used as follows:
+```t
+namespace eval block2 {
+    puts $::blockVal
+}
+```
+### Importing
+New routines can be imported using namespaces. The mathop library can be imported as follows:
+```
+namespace import ::tcl::mathop::+
+```
+### Multiple Arguments
+Multiple arguments can be passed into a function using "args". Whenever args is used all following arguments will be stored in args as a list. This list can then be treated as usual. Here is an example of it in use as shown below:
+```t
+proc printLoop {args} {
+    foreach arg $args {
+        puts $arg
+    }
+}
+printLoop 1 2 3 4 5 6 7 8
+```
+### Conditional statements
+If and else statements can be used much like C put have curly braces. An example of once being used is shown below:
+```t
+if {3>int} {
+    puts "3 is greater than int"
+}
+```
+### Loops
+For loops are used much like C but are syntaxally different. An example of a standard for loop is given as follows:
+```t
+for {set i 0} {$i < 100} {incr i} {
+    puts $i
+}
+```
+While loops are then much as would be expected. They follow the same syntax as above
+```
+while {$i < 100}
 ```
