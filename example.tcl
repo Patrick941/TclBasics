@@ -88,8 +88,7 @@ set command "puts"
 set args "Hello world!"
 eval $command [list $args]
 
-rename while :: oldWhile
+rename while oldWhile
 proc while {} {
     puts "Hello world!"
 }
-
