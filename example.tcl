@@ -92,3 +92,15 @@ rename while oldWhile
 proc while {} {
     puts "Hello world!"
 }
+while
+
+coroutine co1 apply {{} {
+    for {set i 0} {$i < 10} {incr i} {
+        puts "Coroutine iteration $i"
+        yield
+    }
+}}
+for {set i 0} {$i < 10} {incr i} {
+    puts "Main iteration $i"
+    co1
+}

@@ -150,7 +150,25 @@ eval $command [list $args]
 ```
 In the above code snippet braces are placed around the args list so that whitespaces are not treated as seperate words but it understand that the words are all part of one string.
 ### Redefining routines
-We can redefine a given routine in a given namespace and apply a different meaning to it. For example if we wanted to redefine the while loop to print the counter of iterations as it goes we could do that as follows:
+We can redefine a given routine in a given namespace and apply a different meaning to it. For example if we wanted to redefine the while loop to just print hello world instead we could do that as follows:
 ```t
-
+rename while oldWhile
+proc while {} {
+    puts "Hello world!"
+}
+while
+```
+### Coroutines
+Coroutines can be used for asynchronous code to be able to move between differents points of code to carry out some piece of code then return to main. A coroutine when entered multiple times do not have an individual scope. Each time the coroutine is entered it picks up where it left off. This can be seen in the below code snippet which will print the same values from the main as it will the coroutine:
+```t
+coroutine co1 apply {{} {
+    for {set i 0} {$i < 10} {incr i} {
+        puts "Coroutine iteration $i"
+        yield
+    }
+}}
+for {set i 0} {$i < 10} {incr i} {
+    puts "Main iteration $i"
+    co1
+}
 ```
