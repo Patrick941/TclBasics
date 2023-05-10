@@ -17,6 +17,7 @@ set part3 ;# Returns the value of the variable.
 # Left and right brackets embed a script to be evaluated for a result to
 # substitute into the word:
 set greeting $part1$part2[set part3]
+set greeting "hello world";
 
 
 # An embedded script may be composed of multiple commands, the last of which provides
@@ -33,26 +34,7 @@ set someInt [expr {$someInt * 3}]
 puts $someInt;
 puts $greeting ;# The output is "Salutations3"
 
-# Variables
-set a 10
-set b 5
-
-# Addition
-set sum [expr {$a + $b}]
-puts "Sum: $sum"
-
-# Subtraction
-set difference [expr {$a - $b}]
-puts "Difference: $difference"
-
-# Multiplication
-set product [expr {$a * $b}]
-puts "Product: $product"
-
-# Division
-set quotient [expr {$a / double($b)}]
-puts "Quotient: $quotient"
-
-# Modulus
-set remainder [expr {$a % $b}]
-puts "Remainder: $remainder"
+set object(string1) Hello
+set object(string2) world
+set object(string3) !
+puts "$object(string1) $object(string2)$object(string3)"
